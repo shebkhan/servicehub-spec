@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ServiceHub - Technical Specification</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 11pt;
+            line-height: 1.6;
+            color: #1a1a2e;
+            background: #fff;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+        
+        /* Cover Page */
+        .cover {
+            text-align: center;
+            padding: 120px 0;
+            border-bottom: 3px solid #1a1a2e;
+            margin-bottom: 40px;
+        }
+        
+        .cover h1 {
+            font-size: 42pt;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+        }
+        
+        .cover .subtitle {
+            font-size: 16pt;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        
+        .cover .meta {
+            font-size: 10pt;
+            color: #999;
+        }
+        
+        /* Headers */
+        h1 {
+            font-size: 24pt;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin: 35px 0 15px 0;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e8e8f0;
+        }
+        
+        h2 {
+            font-size: 16pt;
+            font-weight: 600;
+            color: #2d2d4a;
+            margin: 25px 0 12px 0;
+        }
+        
+        h3 {
+            font-size: 12pt;
+            font-weight: 600;
+            color: #3d3d5c;
+            margin: 18px 0 8px 0;
+        }
+        
+        h4 {
+            font-size: 11pt;
+            font-weight: 600;
+            color: #4a4a6a;
+            margin: 15px 0 6px 0;
+        }
+        
+        /* Paragraphs */
+        p {
+            margin-bottom: 10px;
+        }
+        
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 10pt;
+        }
+        
+        th {
+            background: #1a1a2e;
+            color: #fff;
+            padding: 10px 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 8px 12px;
+            border-bottom: 1px solid #e8e8f0;
+        }
+        
+        tr:nth-child(even) {
+            background: #f8f8fc;
+        }
+        
+        tr:hover {
+            background: #f0f0f8;
+        }
+        
+        /* Code blocks */
+        pre {
+            background: #1a1a2e;
+            color: #e8e8f0;
+            padding: 15px 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 9pt;
+            margin: 12px 0;
+            line-height: 1.5;
+        }
+        
+        code {
+            font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+            font-size: 9.5pt;
+            background: #f4f4f8;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #6b21a8;
+        }
+        
+        pre code {
+            background: none;
+            padding: 0;
+            color: inherit;
+        }
+        
+        /* Lists */
+        ul, ol {
+            margin: 10px 0 10px 25px;
+        }
+        
+        li {
+            margin-bottom: 5px;
+        }
+        
+        /* Blockquotes */
+        blockquote {
+            border-left: 4px solid #6366f1;
+            padding: 10px 15px;
+            margin: 15px 0;
+            background: #f8f8fc;
+            font-style: italic;
+        }
+        
+        /* Horizontal Rule */
+        hr {
+            border: none;
+            border-top: 1px solid #e8e8f0;
+            margin: 30px 0;
+        }
+        
+        /* Section divider */
+        .section-divider {
+            border-bottom: 1px dashed #e8e8f0;
+            margin: 30px 0;
+        }
+        
+        /* Table of Contents */
+        .toc {
+            background: #f8f8fc;
+            padding: 20px 25px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .toc h2 {
+            margin-top: 0;
+        }
+        
+        .toc ul {
+            list-style: none;
+            margin-left: 0;
+        }
+        
+        .toc li {
+            padding: 4px 0;
+        }
+        
+        .toc a {
+            color: #6366f1;
+            text-decoration: none;
+        }
+        
+        .toc a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 9pt;
+            font-weight: 600;
+        }
+        
+        .badge-new {
+            background: #dcfce7;
+            color: #166534;
+        }
+        
+        .badge-beta {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        
+        /* Footer */
+        .footer {
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 2px solid #e8e8f0;
+            text-align: center;
+            font-size: 9pt;
+            color: #888;
+        }
+        
+        /* Page break */
+        .page-break {
+            page-break-after: always;
+        }
+        
+        /* Diagram styling */
+        pre.diagram {
+            background: #f8f8fc;
+            color: #1a1a2e;
+            border: 1px solid #e8e8f0;
+        }
+        
+        /* Highlight */
+        .highlight {
+            background: #fef9c3;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Cover Page -->
+<div class="cover">
+    <h1>ServiceHub</h1>
+    <div class="subtitle">JustClean SaaS Clone - Technical Specification</div>
+    <div class="meta">
+        Version 1.0 | April 2026<br>
+        Multi-Tenant Services Marketplace Platform
+    </div>
+</div>
+
+<!-- Table of Contents -->
+<div class="toc">
+    <h2>Table of Contents</h2>
+    <ul>
+        <li>1. Project Overview</li>
+        <li>2. System Architecture</li>
+        <li>3. Database Schema</li>
+        <li>4. API Specification</li>
+        <li>5. Mobile App Specifications</li>
+        <li>6. Web Frontend Specifications</li>
+        <li>7. Admin Dashboard</li>
+        <li>8. Payment & Billing</li>
+        <li>9. Multi-Tenancy</li>
+        <li>10. Security</li>
+        <li>11. DevOps & Infrastructure</li>
+        <li>12. Feature Roadmap</li>
+    </ul>
+</div>
+
+<hr>
+
+<!-- 1. Project Overview -->
+<h1>1. Project Overview</h1>
+
+<h2>1.1 Project Name</h2>
+<p><strong>ServiceHub</strong> (placeholder SaaS name for JustClean clone)</p>
+
+<h2>1.2 Project Type</h2>
+<p>Multi-tenant SaaS platform for on-demand local services marketplace</p>
+
+<h2>1.3 Core Functionality</h2>
+<p>A white-label marketplace connecting customers with service providers (cleaning, beauty, automotive, pet care) featuring booking management, credit-based payments, scheduling, and provider management.</p>
+
+<h2>1.4 Target Users</h2>
+<table>
+    <tr><th>User Type</th><th>Description</th></tr>
+    <tr><td><strong>Customers</strong></td><td>End users booking services</td></tr>
+    <tr><td><strong>Service Providers</strong></td><td>Individual contractors or businesses offering services</td></tr>
+    <tr><td><strong>Tenant Admins</strong></td><td>Business owners managing their own service marketplace</td></tr>
+    <tr><td><strong>Super Admin</strong></td><td>Platform owner managing all tenants</td></tr>
+</table>
+
+<h2>1.5 Supported Services</h2>
+<ul>
+    <li>Laundry collection & delivery</li>
+    <li>Home cleaning</li>
+    <li>Mobile car wash</li>
+    <li>Car wash station</li>
+    <li>Male hair barbers (at home / at barbershop)</li>
+    <li>Female hair salons (at home / at boutique)</li>
+    <li>Male spas (at home / at spa)</li>
+    <li>Female spas (at home / at spa)</li>
+    <li>Mobile nail station</li>
+    <li>Pets grooming</li>
+</ul>
+
+<div class="page-break"></div>
+
+<!-- 2. System Architecture -->
+<h1>2. System Architecture</h1>
+
+<h2>2.1 High-Level Architecture</h2>
+<pre class="diagram">
+┌─────────────────────────────────────────────────────────────────┐
+│                           CLIENTS                                │
+├─────────────┬─────────────┬─────────────┬─────────────┬────────┤
+│  Customer   │   Provider  │   Tenant    │    Super    │ Guest  │
+│   Mobile    │   Mobile    │   Admin     │    Admin    │  (Web) │
+│  (Flutter)  │  (Flutter)  │ (Next.js)   │  (Next.js)  │        │
+└──────┬──────┴──────┬──────┴──────┬──────┴──────┬──────┴────┬─┘
+       │              │             │             │            │
+       └──────────────┴─────────────┴─────────────┴────────────┘
+                                    │
+                           ┌────────┴────────┐
+                           │   API Gateway   │
+                           │  (Kong/Nginx)   │
+                           └────────┬────────┘
+                                    │
+              ┌─────────────────────┼─────────────────────┐
+              │                     │                     │
+    ┌─────────┴─────────┐  ┌───────┴───────┐  ┌────────┴────────┐
+    │      FastAPI       │  │  Auth Service │  │ Notification    │
+    │      Backend       │  │   (JWT)       │  │    Service       │
+    │     (Python)       │  │               │  │   (OneSignal)    │
+    └─────────┬─────────┘  └───────────────┘  └──────────────────┘
+              │
+              │         ┌───────────────┐
+              │         │    Stripe     │
+              │         │   Payments    │
+              │         └───────────────┘
+              │
+     ┌────────┴─────────────────────────────┐
+     │        PostgreSQL + Redis            │
+     │      (Supabase / AWS RDS)            │
+     └──────────────────────────────────────┘
+</pre>
+
+<h2>2.2 Technology Stack Summary</h2>
+<table>
+    <tr><th>Layer</th><th>Technology</th><th>Version</th></tr>
+    <tr><td>Mobile Apps</td><td>Flutter</td><td>3.19+</td></tr>
+    <tr><td>Web Frontend</td><td>Next.js 14</td><td>14.x</td></tr>
+    <tr><td>Backend API</td><td>FastAPI (Python)</td><td>0.110+</td></tr>
+    <tr><td>Database</td><td>PostgreSQL 16</td><td>16.x</td></tr>
+    <tr><td>Cache/Queue</td><td>Redis</td><td>7.x</td></tr>
+    <tr><td>ORM</td><td>Prisma</td><td>5.x</td></tr>
+    <tr><td>Auth</td><td>Supabase Auth / JWT</td><td>-</td></tr>
+    <tr><td>Payments</td><td>Stripe</td><td>-</td></tr>
+    <tr><td>File Storage</td><td>AWS S3 / Cloudflare R2</td><td>-</td></tr>
+    <tr><td>Push Notifications</td><td>OneSignal</td><td>-</td></tr>
+    <tr><td>Email</td><td>SendGrid / AWS SES</td><td>-</td></tr>
+    <tr><td>Monitoring</td><td>Sentry + PostHog</td><td>-</td></tr>
+    <tr><td>Hosting</td><td>Vercel (web) + Railway (API)</td><td>-</td></tr>
+</table>
+
+<h2>2.3 Microservices Breakdown</h2>
+<table>
+    <tr><th>Service</th><th>Responsibility</th><th>Language/Framework</th></tr>
+    <tr><td>api-gateway</td><td>Request routing, rate limiting</td><td>Node.js / Kong</td></tr>
+    <tr><td>auth-service</td><td>Authentication, JWT, OAuth</td><td>Python/FastAPI</td></tr>
+    <tr><td>user-service</td><td>User management, profiles</td><td>Python/FastAPI</td></tr>
+    <tr><td>booking-service</td><td>Order lifecycle, scheduling</td><td>Python/FastAPI</td></tr>
+    <tr><td>payment-service</td><td>Stripe integration, wallets</td><td>Python/FastAPI</td></tr>
+    <tr><td>notification-service</td><td>Push, email, SMS</td><td>Node.js</td></tr>
+    <tr><td>provider-service</td><td>Provider onboarding, verification</td><td>Python/FastAPI</td></tr>
+    <tr><td>review-service</td><td>Ratings, reviews</td><td>Python/FastAPI</td></tr>
+    <tr><td>analytics-service</td><td>Usage tracking, reporting</td><td>Python/FastAPI</td></tr>
+    <tr><td>search-service</td><td>Service discovery, geo-search</td><td>Typesense/Elasticsearch</td></tr>
+</table>
+
+<div class="page-break"></div>
+
+<!-- 3. Database Schema -->
+<h1>3. Database Schema</h1>
+
+<h2>3.1 Multi-Tenant Strategy</h2>
+<ul>
+    <li><strong>Approach:</strong> Row-Level Security (RLS) with <code>tenant_id</code> on all tenant-scoped tables</li>
+    <li><strong>Tenant isolation:</strong> PostgreSQL schemas per tenant (optional for enterprise)</li>
+    <li><strong>Shared tables:</strong> <code>users</code>, <code>services</code>, <code>service_categories</code> (global catalog)</li>
+</ul>
+
+<h2>3.2 Entity Relationship Diagram</h2>
+<pre class="diagram">
+┌──────────────┐     ┌──────────────┐     ┌──────────────┐
+│    Tenant    │────▶│   Tenant     │────▶│    User      │
+│  (Business)  │     │  Settings    │     │  (Member)    │
+└──────┬───────┘     └──────────────┘     └──────┬───────┘
+       │                                         │
+       │         ┌───────────────────────────────┤
+       │         │                               │
+       ▼         ▼                               ▼
+┌──────────────┐          ┌──────────────┐     ┌──────────────┐
+│   Service    │◀─────────│    Order     │────▶│   Payment    │
+│  (Offered)   │          │   (Booking)  │     │  (Credit)    │
+└──────────────┘          └──────┬───────┘     └──────────────┘
+       │                         │
+       │                         │
+       ▼                         ▼
+┌──────────────┐          ┌──────────────┐
+│    Review   │          │   Schedule   │
+│             │          │   (Slots)    │
+└──────────────┘          └──────────────┘
+</pre>
+
+<h2>3.3 Core Prisma Models</h2>
+
+<h3>Tenant Model</h3>
+<pre><code>model Tenant {
+  id            String    @id @default(uuid())
+  name          String
+  slug          String    @unique
+  logo          String?
+  primaryColor  String    @default("#0066CC")
+  secondaryColor String   @default("#FFFFFF")
+  
+  plan          TenantPlan @default(FREE)
+  subscriptionEnd DateTime?
+  settings      Json      @default("{}")
+  
+  isActive      Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  users         TenantUser[]
+  providers     Provider[]
+  orders        Order[]
+  // ... relations
+}
+
+enum TenantPlan {
+  FREE
+  STARTER      // $49/mo - 100 bookings
+  PROFESSIONAL // $149/mo - 1000 bookings
+  ENTERPRISE   // $499/mo - unlimited
+}</code></pre>
+
+<h3>User Model</h3>
+<pre><code>model TenantUser {
+  id        String   @id @default(uuid())
+  tenantId  String
+  tenant    Tenant   @relation(fields: [tenantId], references: [id])
+  
+  email     String
+  password  String
+  name      String
+  phone     String?
+  role      UserRole @default(CUSTOMER)
+  isActive  Boolean  @default(true)
+  
+  customer  Customer?
+  provider  Provider?
+  
+  @@unique([tenantId, email])
+}
+
+enum UserRole {
+  SUPER_ADMIN
+  TENANT_ADMIN
+  PROVIDER
+  CUSTOMER
+}</code></pre>
+
+<h3>Order Model</h3>
+<pre><code>model Order {
+  id              String   @id @default(uuid())
+  orderNumber     String   @unique
+  
+  tenantId        String
+  customerId      String
+  providerId      String?
+  
+  status          OrderStatus @default(PENDING)
+  
+  scheduledDate   DateTime
+  scheduledTime   String
+  serviceDuration Int
+  serviceAt       String    // "home" | "store" | "provider_location"
+  address         Json?
+  
+  items           OrderItem[]
+  subtotal        Decimal
+  discount        Decimal  @default(0)
+  total           Decimal
+  creditUsed      Decimal  @default(0)
+  cashCollected   Decimal  @default(0)
+  
+  placedAt        DateTime @default(now())
+  confirmedAt     DateTime?
+  startedAt       DateTime?
+  completedAt     DateTime?
+  cancelledAt     DateTime?
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  DISPATCHED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+  REFUNDED
+}</code></pre>
+
+<h3>Provider Model</h3>
+<pre><code>model Provider {
+  id              String   @id @default(uuid())
+  userId          String   @unique
+  tenantId        String
+  
+  businessName    String?
+  bio             String?
+  profileImage    String?
+  
+  isVerified      Boolean  @default(false)
+  verifiedAt      DateTime?
+  
+  workingHours    Json     @default("{}")
+  serviceRadius   Int      @default(25)
+  
+  avgRating       Decimal  @default(0)
+  totalReviews    Int      @default(0)
+  totalJobs       Int      @default(0)
+  completedJobs   Int      @default(0)
+  
+  isActive        Boolean  @default(true)
+  
+  services        ProviderService[]
+  orders          Order[]
+  reviews         Review[]
+}</code></pre>
+
+<div class="page-break"></div>
+
+<!-- 4. API Specification -->
+<h1>4. API Specification</h1>
+
+<h2>4.1 Base URL Structure</h2>
+<pre>
+Production: https://api.servicehub.com/v1
+Staging:    https://api.staging.servicehub.com/v1
+Local:      http://localhost:8000/v1
+</pre>
+
+<h2>4.2 Authentication Endpoints</h2>
+<table>
+    <tr><th>Method</th><th>Endpoint</th><th>Description</th></tr>
+    <tr><td>POST</td><td>/auth/register</td><td>Register new user</td></tr>
+    <tr><td>POST</td><td>/auth/login</td><td>Login, returns JWT</td></tr>
+    <tr><td>POST</td><td>/auth/refresh</td><td>Refresh access token</td></tr>
+    <tr><td>POST</td><td>/auth/logout</td><td>Invalidate refresh token</td></tr>
+    <tr><td>POST</td><td>/auth/forgot-password</td><td>Send reset email</td></tr>
+    <tr><td>POST</td><td>/auth/reset-password</td><td>Reset password with token</td></tr>
+</table>
+
+<h2>4.3 API Endpoints by Module</h2>
+
+<h3>Services</h3>
+<table>
+    <tr><th>Method</th><th>Endpoint</th><th>Description</th></tr>
+    <tr><td>GET</td><td>/services</td><td>List all services (public)</td></tr>
+    <tr><td>GET</td><td>/services/categories</td><td>List categories</td></tr>
+    <tr><td>GET</td><td>/services/:slug</td><td>Service details</td></tr>
+    <tr><td>POST</td><td>/tenant/services</td><td>Add service to tenant</td></tr>
+    <tr><td>PATCH</td><td>/tenant/services/:id</td><td>Update tenant service</td></tr>
+    <tr><td>DELETE</td><td>/tenant/services/:id</td><td>Remove service</td></tr>
+</table>
+
+<h3>Providers</h3>
+<table>
+    <tr><th>Method</th><th>Endpoint</th><th>Description</th></tr>
+    <tr><td>GET</td><td>/providers</td><td>Search providers (with filters)</td></tr>
+    <tr><td>GET</td><td>/providers/:id</td><td>Provider profile</td></tr>
+    <tr><td>GET</td><td>/providers/:id/availability</td><td>Provider's available slots</td></tr>
+    <tr><td>PATCH</td><td>/providers/me</td><td>Update own profile</td></tr>
+    <tr><td>GET</td><td>/providers/me/earnings</td><td>Earnings report</td></tr>
+</table>
+
+<h3>Orders</h3>
+<table>
+    <tr><th>Method</th><th>Endpoint</th><th>Description</th></tr>
+    <tr><td>GET</td><td>/orders</td><td>List customer's orders</td></tr>
+    <tr><td>POST</td><td>/orders</td><td>Create new order</td></tr>
+    <tr><td>GET</td><td>/orders/:id</td><td>Order details</td></tr>
+    <tr><td>PATCH</td><td>/orders/:id/cancel</td><td>Cancel order</td></tr>
+    <tr><td>GET</td><td>/provider/orders</td><td>Provider's assigned orders</td></tr>
+    <tr><td>PATCH</td><td>/provider/orders/:id/status</td><td>Update order status</td></tr>
+</table>
+
+<h3>Payments & Wallet</h3>
+<table>
+    <tr><th>Method</th><th>Endpoint</th><th>Description</th></tr>
+    <tr><td>GET</td><td>/wallet/balance</td><td>Current wallet balance</td></tr>
+    <tr><td>GET</td><td>/wallet/transactions</td><td>Transaction history</td></tr>
+    <tr><td>POST</td><td>/wallet/topup</td><td>Add credit (Stripe)</td></tr>
+    <tr><td>POST</td><td>/payments/stripe-intent</td><td>Create payment intent</td></tr>
+    <tr><td>POST</td><td>/payments/confirm</td><td>Confirm payment</td></tr>
+    <tr><td>POST</td><td>/payments/refund</td><td>Process refund</td></tr>
+</table>
+
+<h2>4.4 Create Order Request Example</h2>
+<pre><code>{
+  "scheduled_date": "2026-04-05",
+  "scheduled_time": "10:00",
+  "service_at": "home",
+  "address": {
+    "lat": 3.1390,
+    "lng": 101.6869,
+    "full_address": "123 Jalan Utama, Kuala Lumpur",
+    "instructions": "Gate code: 1234"
+  },
+  "items": [
+    { "service_id": "svc-uuid", "quantity": 1 }
+  ],
+  "payment_method": "wallet",
+  "promo_code": "SAVE20"
+}</code></pre>
+
+<h2>4.5 Get Provider Availability Response</h2>
+<pre><code>{
+  "date": "2026-04-05",
+  "slots": [
+    { "time": "09:00", "available": true },
+    { "time": "10:00", "available": true },
+    { "time": "11:00", "available": false },
+    { "time": "12:00", "available": true }
+  ]
+}</code></pre>
+
+<div class="page-break"></div>
+
+<!-- 5. Mobile App Specifications -->
+<h1>5. Mobile App Specifications</h1>
+
+<h2>5.1 Flutter App Structure</h2>
+<pre>
+justclean_app/
+lib/
+  main.dart
+  app/
+    app.dart                 # MaterialApp configuration
+    routes.dart              # Route definitions
+    themes.dart              # Theme configuration
+  
+  core/
+    constants/
+      api_constants.dart
+      app_constants.dart
+      storage_keys.dart
+    errors/
+      exceptions.dart
+      failure.dart
+    network/
+      api_client.dart
+      api_interceptor.dart
+    utils/
+      validators.dart
+      formatters.dart
+  
+  data/
+    models/                  # Data models
+    repositories/           # Repository implementations
+    datasources/
+      remote/api_datasource.dart
+      local/local_storage.dart
+  
+  domain/
+    entities/               # Business entities
+    repositories/           # Repository interfaces
+    usecases/               # Use cases
+  
+  presentation/
+    blocs/                  # BLoC state management
+      auth/
+      service/
+      order/
+      wallet/
+    pages/
+      splash/
+      auth/
+        login_page.dart
+        register_page.dart
+      home/home_page.dart
+      booking/
+        select_service_page.dart
+        select_provider_page.dart
+        select_time_page.dart
+        confirm_booking_page.dart
+      orders/
+      wallet/
+      profile/
+    widgets/
+      common/
+        app_button.dart
+        app_text_field.dart
+      service/
+        service_card.dart
+      booking/
+        time_slot_picker.dart
+        provider_card.dart
+</pre>
+
+<h2>5.2 Key Dependencies</h2>
+<pre><code>dependencies:
+  flutter:
+    sdk: flutter
+  
+  # State Management
+  flutter_bloc: ^8.1.6
+  equatable: ^2.0.5
+  
+  # Dependency Injection
+  get_it: ^7.7.0
+  injectable: ^2.4.4
+  
+  # Networking
+  dio: ^5.7.0
+  retrofit: ^4.2.0
+  
+  # Local Storage
+  shared_preferences: ^2.3.2
+  flutter_secure_storage: ^9.2.2
+  
+  # UI
+  flutter_svg: ^2.0.10
+  cached_network_image: ^3.4.1
+  shimmer: ^3.0.0
+  flutter_rating_bar: ^4.0.1
+  intl: ^0.19.0
+  
+  # Maps & Location
+  google_maps_flutter: ^2.9.0
+  geolocator: ^13.0.1
+  
+  # Push Notifications
+  firebase_core: ^3.6.0
+  firebase_messaging: ^15.1.3
+  one_signal_flutter: ^3.5.2
+  
+  # Payments
+  stripe_flutter: ^4.0.0</code></pre>
+
+<h2>5.3 Customer App Screens</h2>
+<table>
+    <tr><th>Screen</th><th>Description</th><th>Key Components</th></tr>
+    <tr><td>Splash</td><td>App loading, check auth</td><td>Logo animation, check stored token</td></tr>
+    <tr><td>Login</td><td>Email/password login</td><td>Form validation, remember me, forgot password</td></tr>
+    <tr><td>Register</td><td>New account creation</td><td>Name, email, phone, password, referral code</td></tr>
+    <tr><td>Home</td><td>Dashboard with services</td><td>Category carousel, featured services, deals</td></tr>
+    <tr><td>Service List</td><td>Browse by category</td><td>Grid of services, filter, search</td></tr>
+    <tr><td>Service Detail</td><td>Single service info</td><td>Price, duration, description, provider count</td></tr>
+    <tr><td>Select Provider</td><td>Choose provider</td><td>Rating, distance, price, availability</td></tr>
+    <tr><td>Select Time</td><td>Pick date & slot</td><td>Calendar, available time slots</td></tr>
+    <tr><td>Confirm Booking</td><td>Order summary</td><td>Items, address, payment method, promo code</td></tr>
+    <tr><td>Booking Success</td><td>Confirmation</td><td>Order number, provider info, ETA</td></tr>
+    <tr><td>My Orders</td><td>Order history</td><td>Tabs (Upcoming, Ongoing, Completed)</td></tr>
+    <tr><td>Wallet</td><td>Credit balance</td><td>Top up, transaction history, bonus info</td></tr>
+    <tr><td>Profile</td><td>User settings</td><td>Edit info, addresses, payment methods</td></tr>
+    <tr><td>Reviews</td><td>Write/view reviews</td><td>Star rating, text, photos</td></tr>
+</table>
+
+<h2>5.4 Provider App Screens</h2>
+<table>
+    <tr><th>Screen</th><th>Description</th></tr>
+    <tr><td>Dashboard</td><td>Today's jobs, earnings, rating</td></tr>
+    <tr><td>Incoming Requests</td><td>New booking requests to accept/decline</td></tr>
+    <tr><td>My Jobs</td><td>Scheduled, ongoing, completed jobs</td></tr>
+    <tr><td>Job Detail</td><td>Customer info, address, navigate button</td></tr>
+    <tr><td>Start Job</td><td>Check-in, mark job started</td></tr>
+    <tr><td>Complete Job</td><td>Add notes, request payment</td></tr>
+    <tr><td>Earnings</td><td>Weekly/monthly breakdown, payout history</td></tr>
+    <tr><td>Availability</td><td>Set weekly schedule</td></tr>
+    <tr><td>Reviews</td><td>View customer feedback</td></tr>
+</table>
+
+<div class="page-break"></div>
+
+<!-- 6. Web Frontend -->
+<h1>6. Web Frontend Specifications</h1>
+
+<h2>6.1 Next.js 14 App Structure</h2>
+<pre>
+web/
+app/
+  (auth)/
+    login/
+    register/
+    forgot-password/
+  
+  (customer)/
+    page.tsx                 # Home
+    services/
+    booking/
+    orders/
+    profile/
+  
+  (provider)/
+    provider/
+      dashboard/
+      jobs/
+      earnings/
+      settings/
+  
+  (admin)/
+    admin/
+      dashboard/
+      orders/
+      providers/
+      customers/
+      services/
+      reports/
+      settings/
+  
+  api/
+    auth/
+    orders/
+    webhooks/
+
+components/
+  ui/                       # shadcn/ui components
+  layout/
+    header.tsx
+    footer.tsx
+    sidebar.tsx
+  forms/
+    booking-form.tsx
+  shared/
+    service-card.tsx
+    provider-card.tsx
+
+hooks/
+  use-auth.ts
+  use-orders.ts
+  use-services.ts
+</pre>
+
+<h2>6.2 Key Dependencies</h2>
+<pre><code>{
+  "dependencies": {
+    "next": "14.2.15",
+    "react": "^18.3.1",
+    "@tanstack/react-query": "^5.59.0",
+    "zustand": "^5.0.0",
+    "next-auth": "^4.24.8",
+    "zod": "^3.23.8",
+    "react-hook-form": "^7.53.0",
+    "shadcn-ui": "^0.10.0",
+    "@stripe/stripe-js": "^4.8.0",
+    "lucide-react": "^0.453.0",
+    "date-fns": "^4.1.0"
+  }
+}</code></pre>
+
+<div class="page-break"></div>
+
+<!-- 7. Admin Dashboard -->
+<h1>7. Admin Dashboard</h1>
+
+<h2>7.1 Super Admin Features</h2>
+<table>
+    <tr><th>Feature</th><th>Description</th></tr>
+    <tr><td>Tenant Management</td><td>Create, edit, suspend tenants</td></tr>
+    <tr><td>Platform Analytics</td><td>Total GMV, orders, users across all tenants</td></tr>
+    <tr><td>Revenue Overview</td><td>Subscription revenue, commission earnings</td></tr>
+    <tr><td>Global Settings</td><td>Service categories, system config</td></tr>
+    <tr><td>Audit Logs</td><td>All admin actions logged</td></tr>
+    <tr><td>Support Tickets</td><td>Handle tenant escalations</td></tr>
+</table>
+
+<h2>7.2 Tenant Admin Features</h2>
+<table>
+    <tr><th>Feature</th><th>Description</th></tr>
+    <tr><td>Dashboard</td><td>Today's orders, revenue, new customers</td></tr>
+    <tr><td>Order Management</td><td>All orders with status filters, manual actions</td></tr>
+    <tr><td>Provider Management</td><td>Approve, suspend, view performance</td></tr>
+    <tr><td>Customer Management</td><td>View, edit, refund</td></tr>
+    <tr><td>Service Catalog</td><td>Add/edit services offered</td></tr>
+    <tr><td>Pricing</td><td>Set prices, create packages</td></tr>
+    <tr><td>Promo Codes</td><td>Create discount codes</td></tr>
+    <tr><td>Reports</td><td>Revenue, orders, provider stats</td></tr>
+    <tr><td>Payouts</td><td>Provider payment history</td></tr>
+</table>
+
+<h2>7.3 Admin Dashboard Pages</h2>
+<pre>
+/admin
+  /dashboard
+  /orders
+  /providers
+  /customers
+  /services
+  /transactions
+  /promos
+  /reports
+  /settings
+  /support/tickets
+</pre>
+
+<div class="page-break"></div>
+
+<!-- 8. Payment & Billing -->
+<h1>8. Payment & Billing</h1>
+
+<h2>8.1 Credit/Wallet Flow</h2>
+<pre>
+1. User tops up wallet (Stripe)
+         |
+2. Payment confirmed - Credit added to wallet (+25% bonus)
+         |
+3. User books service - Credit deducted
+         |
+4. Order completed - Provider earnings calculated
+</pre>
+
+<h2>8.2 Credit Bonus Structure</h2>
+<table>
+    <tr><th>Package</th><th>Credit</th><th>Bonus (25%)</th><th>Total Credit</th></tr>
+    <tr><td>Basic</td><td>$100</td><td>$25</td><td>$125</td></tr>
+    <tr><td>Standard</td><td>$250</td><td>$62.50</td><td>$312.50</td></tr>
+    <tr><td>Premium</td><td>$500</td><td>$125</td><td>$625</td></tr>
+    <tr><td>VIP</td><td>$1000</td><td>$250</td><td>$1250</td></tr>
+</table>
+
+<h2>8.3 Stripe Integration</h2>
+<pre><code>async def create_wallet_topup(customer_id: str, amount: int):
+    """Create payment intent for wallet topup"""
+    customer = await get_or_create_stripe_customer(customer_id)
+    
+    intent = stripe.PaymentIntent.create(
+        amount=amount * 100,
+        currency="usd",
+        customer=customer.id,
+        metadata={
+            "type": "wallet_topup",
+            "customer_id": customer_id
+        }
+    )
+    return intent
+
+async def pay_provider(provider_id: str, amount: int, order_id: str):
+    """Pay provider their earnings"""
+    provider = await get_provider(provider_id)
+    
+    transfer = stripe.Transfer.create(
+        amount=amount * 100,
+        currency="usd",
+        destination=provider.stripe_account_id,
+        metadata={
+            "order_id": order_id,
+            "provider_id": provider_id
+        }
+    )
+    return transfer</code></pre>
+
+<h2>8.4 Subscription Tiers</h2>
+<table>
+    <tr><th>Feature</th><th>Free</th><th>Starter ($49)</th><th>Pro ($149)</th><th>Enterprise ($499)</th></tr>
+    <tr><td>Bookings/mo</td><td>10</td><td>100</td><td>1000</td><td>Unlimited</td></tr>
+    <tr><td>Providers</td><td>1</td><td>5</td><td>25</td><td>Unlimited</td></tr>
+    <tr><td>Services</td><td>3</td><td>15</td><td>50</td><td>Unlimited</td></tr>
+    <tr><td>Custom branding</td><td>No</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+    <tr><td>API access</td><td>No</td><td>No</td><td>Yes</td><td>Yes</td></tr>
+    <tr><td>Transaction fee</td><td>5%</td><td>3%</td><td>2%</td><td>1%</td></tr>
+</table>
+
+<div class="page-break"></div>
+
+<!-- 9. Multi-Tenancy -->
+<h1>9. Multi-Tenancy</h1>
+
+<h2>9.1 Tenant Isolation Strategy</h2>
+<pre><code># Middleware to inject tenant
+@app.middleware("http")
+async def add_tenant_context(request: Request, call_next):
+    host = request.headers.get("host", "")
+    if ".servicehub.com" in host:
+        subdomain = host.split(".servicehub.com")[0]
+        tenant = await get_tenant_by_slug(subdomain)
+        request.state.tenant_id = tenant.id
+    else:
+        request.state.tenant_id = request.headers.get("X-Tenant-ID")
+    
+    response = await call_next(request)
+    return response
+
+# Query with tenant filter
+async def get_orders(tenant_id: str, user_id: str = None):
+    query = "SELECT * FROM orders WHERE tenant_id = :tenant_id"
+    if user_id:
+        query += " AND customer_id = :user_id"
+    return await db.execute(query, {"tenant_id": tenant_id, "user_id": user_id})</code></pre>
+
+<h2>9.2 White-Label Configuration</h2>
+<pre><code>interface TenantTheme {
+  tenantId: string;
+  logo: string;
+  favicon: string;
+  primaryColor: string;
+  secondaryColor: string;
+  fontFamily: string;
+  customDomain?: string;
+  socialLinks: {
+    facebook?: string;
+    instagram?: string;
+    twitter?: string;
+  };
+  emailFromName: string;
+  emailFromAddress: string;
+}</code></pre>
+
+<div class="page-break"></div>
+
+<!-- 10. Security -->
+<h1>10. Security</h1>
+
+<h2>10.1 Role-Based Access Control</h2>
+<pre><code>ROLES = {
+    "SUPER_ADMIN": ["*"],
+    "TENANT_ADMIN": [
+        "tenant:read", "tenant:write",
+        "orders:*", "providers:*", "customers:*",
+        "services:*", "reports:*"
+    ],
+    "PROVIDER": [
+        "provider:read", "provider:write",
+        "orders:read", "orders:update",
+        "earnings:read"
+    ],
+    "CUSTOMER": [
+        "orders:read", "orders:create",
+        "wallet:read", "wallet:write",
+        "reviews:read", "reviews:create"
+    ]
+}</code></pre>
+
+<h2>10.2 Data Security</h2>
+<table>
+    <tr><th>Aspect</th><th>Implementation</th></tr>
+    <tr><td>Data in Transit</td><td>TLS 1.3, HSTS</td></tr>
+    <tr><td>Data at Rest</td><td>AES-256 encryption for sensitive fields</td></tr>
+    <tr><td>Passwords</td><td>Argon2 hashing</td></tr>
+    <tr><td>API Keys</td><td>Encrypted in database, hashed in logs</td></tr>
+    <tr><td>PII</td><td>Field-level encryption for phone, address</td></tr>
+    <tr><td>Backup</td><td>Encrypted daily backups, 30-day retention</td></tr>
+</table>
+
+<div class="page-break"></div>
+
+<!-- 11. DevOps & Infrastructure -->
+<h1>11. DevOps & Infrastructure</h1>
+
+<h2>11.1 Infrastructure Overview</h2>
+<pre class="diagram">
+                           CDN
+                    (CloudFront/Cloudflare)
+                            |
+                     Load Balancer
+                        (ALB)
+              +-----------+-----------+
+              |                       |
+   Web App Tier                  API Tier
+   (Next.js)                   (FastAPI)
+   Auto-scaling                Auto-scaling
+              |                       |
+              +-----------+-----------+
+                          |
+                   Redis Cache
+                  (ElastiCache)
+                          |
+                   PostgreSQL
+                     (RDS)
+          Multi-AZ, Read Replicas (2)
+</pre>
+
+<h2>11.2 CI/CD Pipeline</h2>
+<pre><code>name: Deploy
+
+on:
+  push:
+    branches: [main, develop]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Tests
+        run: docker-compose run --rm api pytest
+      - name: Security Scan
+        run: docker-compose run --rm api safety check
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Docker images
+        run: docker-compose build api web
+      - name: Push to ECR
+        run: |
+          aws ecr get-login-password | docker login --username AWS --password-stdin $ECR_REGISTRY
+          docker push $ECR_REGISTRY/api:latest
+
+  deploy-production:
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to Production
+        run: |
+          aws ecs update-service --cluster production --service api
+          aws ecs wait services-stable --cluster production --services api</code></pre>
+
+<h2>11.3 Environment Variables</h2>
+<table>
+    <tr><th>Variable</th><th>Description</th></tr>
+    <tr><td>DATABASE_URL</td><td>PostgreSQL connection string</td></tr>
+    <tr><td>REDIS_URL</td><td>Redis connection string</td></tr>
+    <tr><td>JWT_SECRET</td><td>JWT signing secret</td></tr>
+    <tr><td>STRIPE_SECRET_KEY</td><td>Stripe API key</td></tr>
+    <tr><td>STRIPE_WEBHOOK_SECRET</td><td>Stripe webhook secret</td></tr>
+    <tr><td>AWS_ACCESS_KEY_ID</td><td>AWS credentials</td></tr>
+    <tr><td>S3_BUCKET</td><td>File storage bucket</td></tr>
+    <tr><td>ONESIGNAL_APP_ID</td><td>Push notification app ID</td></tr>
+</table>
+
+<div class="page-break"></div>
+
+<!-- 12. Feature Roadmap -->
+<h1>12. Feature Roadmap</h1>
+
+<h2>Phase 1: MVP (8-10 weeks)</h2>
+<ul>
+    <li>User registration & login</li>
+    <li>Service browsing (categories, services)</li>
+    <li>Provider discovery & profiles</li>
+    <li>Booking flow (select service - provider - time - confirm)</li>
+    <li>Order management (view, cancel)</li>
+    <li>Basic wallet (top-up, credit usage)</li>
+    <li>Push notifications (order updates)</li>
+    <li>Web landing page</li>
+</ul>
+
+<h2>Phase 2: Core Features (4-6 weeks)</h2>
+<ul>
+    <li>Provider app (receive jobs, update status, earnings)</li>
+    <li>Admin dashboard (tenant management)</li>
+    <li>Review & rating system</li>
+    <li>Promo codes & discounts</li>
+    <li>Multiple addresses</li>
+    <li>Order tracking (real-time status)</li>
+</ul>
+
+<h2>Phase 3: Payments & Monetization (3-4 weeks)</h2>
+<ul>
+    <li>Stripe integration (full payments)</li>
+    <li>Subscription tiers</li>
+    <li>Provider payouts</li>
+    <li>Transaction history</li>
+    <li>Invoice generation</li>
+</ul>
+
+<h2>Phase 4: Advanced Features (4-6 weeks)</h2>
+<ul>
+    <li>Multi-language support</li>
+    <li>Referral program</li>
+    <li>Package/bundle bookings</li>
+    <li>Recurring bookings (weekly, bi-weekly)</li>
+    <li>Advanced analytics (tenant dashboard)</li>
+    <li>WhatsApp/Chat integration</li>
+</ul>
+
+<h2>Phase 5: Scale & Optimize (Ongoing)</h2>
+<ul>
+    <li>Performance optimization</li>
+    <li>Advanced search (Elasticsearch)</li>
+    <li>AI-powered recommendations</li>
+    <li>Custom domain support (white-label)</li>
+    <li>API for third-party integrations</li>
+    <li>Mobile SDK for partners</li>
+</ul>
+
+<div class="page-break"></div>
+
+<!-- Appendix -->
+<h1>Appendix A: API Error Codes</h1>
+<table>
+    <tr><th>Code</th><th>Message</th><th>HTTP Status</th></tr>
+    <tr><td>AUTH001</td><td>Invalid credentials</td><td>401</td></tr>
+    <tr><td>AUTH002</td><td>Token expired</td><td>401</td></tr>
+    <tr><td>AUTH003</td><td>Account locked</td><td>403</td></tr>
+    <tr><td>ORDER001</td><td>Slot not available</td><td>400</td></tr>
+    <tr><td>ORDER002</td><td>Provider unavailable</td><td>400</td></tr>
+    <tr><td>PAY001</td><td>Payment failed</td><td>402</td></tr>
+    <tr><td>PAY002</td><td>Insufficient wallet balance</td><td>400</td></tr>
+    <tr><td>SVC001</td><td>Service not found</td><td>404</td></tr>
+    <tr><td>SVC002</td><td>Service not offered in your area</td><td>400</td></tr>
+    <tr><td>USR001</td><td>User not found</td><td>404</td></tr>
+    <tr><td>TENANT001</td><td>Tenant not found</td><td>404</td></tr>
+    <tr><td>TENANT002</td><td>Subscription expired</td><td>403</td></tr>
+</table>
+
+<h1>Appendix B: Glossary</h1>
+<table>
+    <tr><th>Term</th><th>Definition</th></tr>
+    <tr><td>Tenant</td><td>A business (customer of the SaaS) using the platform</td></tr>
+    <tr><td>Provider</td><td>Service provider (individual or business)</td></tr>
+    <tr><td>Customer</td><td>End user booking services</td></tr>
+    <tr><td>ServiceAt</td><td>Location type: home, store, or provider_location</td></tr>
+    <tr><td>Slot</td><td>Available time window for booking</td></tr>
+    <tr><td>Credit</td><td>Platform currency in user's wallet</td></tr>
+    <tr><td>GMV</td><td>Gross Merchandise Value - total transaction value</td></tr>
+</table>
+
+<div class="footer">
+    <p><strong>ServiceHub Technical Specification</strong></p>
+    <p>Version 1.0 | April 2026</p>
+    <p>Multi-Tenant Services Marketplace Platform</p>
+</div>
+
+</body>
+</html>
