@@ -1,0 +1,57 @@
+name: servicehub_customer
+description: ServiceHub Customer Mobile App
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  
+  # State Management
+  flutter_riverpod: ^2.5.1
+  riverpod_annotation: ^2.3.5
+  
+  # Networking
+  dio: ^5.4.3+1
+  
+  # Local Storage
+  shared_preferences: ^2.2.3
+  flutter_secure_storage: ^9.0.0
+  
+  # UI
+  cupertino_icons: ^1.0.8
+  google_fonts: ^6.2.1
+  cached_network_image: ^3.3.1
+  shimmer: ^3.0.0
+  flutter_rating_bar: ^4.0.1
+  intl: ^0.19.0
+  table_calendar: ^3.1.2
+  
+  # Maps & Location
+  geolocator: ^12.0.0
+  google_maps_flutter: ^2.6.1
+  
+  # Push Notifications
+  firebase_core: ^3.4.0
+  firebase_messaging: ^15.1.0
+  
+  # Payments
+  stripe_flutter: ^4.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  riverpod_generator: ^2.4.0
+  build_runner: ^2.4.9
+  json_serializable: ^6.7.1
+
+flutter:
+  uses-material-design: true
+  
+  assets:
+    - assets/images/
+    - assets/icons/
